@@ -1,10 +1,10 @@
-package com.project.proj.note;
+package com.project.proj.service.note;
 
-import jakarta.annotation.PostConstruct;
+import com.project.proj.data.entity.Note;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.project.proj.repository.PseudoRepository;
+import com.project.proj.data.repository.PseudoRepository;
 
 import java.util.List;
 

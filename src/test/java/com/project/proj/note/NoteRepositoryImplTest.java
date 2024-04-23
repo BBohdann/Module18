@@ -1,8 +1,8 @@
 package com.project.proj.note;
 
+import com.project.proj.data.entity.Note;
 import com.project.proj.exeptions.NoteNotFoundException;
-import com.project.proj.note.Note;
-import com.project.proj.note.NoteService;
+import com.project.proj.service.note.NoteService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

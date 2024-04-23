@@ -1,9 +1,9 @@
-package com.project.proj.note;
+package com.project.proj.service.note;
 
 import lombok.Data;
 
 @Data
-public class Note {
+public class NoteDto {
     private Long id;
     private String title;
     private String content;

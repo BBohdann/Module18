@@ -1,4 +1,6 @@
-package com.project.proj.note;
+package com.project.proj.service.note;
+
+import com.project.proj.data.entity.Note;
 
 import java.util.List;
 

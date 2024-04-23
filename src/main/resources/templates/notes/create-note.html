@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-3">
+    <form action="/note/create" method="post">
+        <div class="card">
+            <div class="card-header">Create new Note</div>
+            <div class="card-body">
+                <label for="title">Enter title</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                </div>
+                <label for="content">Enter content</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <input type="text" class="form-control" id="content" name="content">
+                    </div>
+                </div>
+                <div class="class-footer">
+                    <button type="submit" class="btn btn-primary"> Create Note </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

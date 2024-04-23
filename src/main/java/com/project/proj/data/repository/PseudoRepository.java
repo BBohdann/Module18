@@ -1,9 +1,8 @@
-package com.project.proj.repository;
+package com.project.proj.data.repository;
 
 import com.project.proj.exeptions.NoteNotFoundException;
-import jakarta.annotation.PostConstruct;
 import lombok.Data;
-import com.project.proj.note.Note;
+import com.project.proj.data.entity.Note;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
