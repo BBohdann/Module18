@@ -1,7 +1,9 @@
 package com.project.proj.note;
 
-import com.project.proj.data.entity.Note;
+import com.project.proj.data.repository.NoteRepository;
 import com.project.proj.exeptions.NoteNotFoundException;
+import com.project.proj.service.mapper.NoteMapper;
+import com.project.proj.service.note.NoteDto;
 import com.project.proj.service.note.NoteService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,47 +14,50 @@ import org.springframework.boot.test.context.SpringBootTest;
 class NoteRepositoryImplTest {
     @Autowired
     private NoteService service;
+    @Autowired
+    private NoteMapper mapper;
+    @Autowired
+    private NoteRepository repository;
 
     @Test
-    public void testNotFoundNoteThrowsExp(){
-        Assertions.assertThrows(NoteNotFoundException.class, ()-> service.getById(41));
-        Assertions.assertThrows(NoteNotFoundException.class, ()-> service.deleteById(999999));
-
+    void testNotFoundNoteThrowsExp() {
+        Assertions.assertThrows(NoteNotFoundException.class, () -> service.getById(41));
+        Assertions.assertThrows(NoteNotFoundException.class, () -> service.deleteById(999999));
     }
+
     @Test
-    public void testNoteAddCorectly() {
-        Note note = new Note();
+    void testNoteAddCorectly() {
+        NoteDto note = new NoteDto();
         note.setTitle("TestTitle");
         note.setContent("Content");
-        service.add(note);
-        Assertions.assertEquals(findLastNote(), note);
+        NoteDto added = service.add(note);
+        Assertions.assertEquals(findLastNote(), added);
     }
 
     @Test
-    public void testNoteUpdate(){
-        Note note = new Note();
-        note.setTitle("Test");
+    void testNoteUpdate() {
+        NoteDto note = new NoteDto();
+        note.setTitle("Testt");
         note.setContent("TestContent");
-        Note beforeUpdateNote = service.add(note);
+        NoteDto noteToUpdate = service.add(note);
+        Long idBeforeUpdate = noteToUpdate.getId();
 
         String updatedTitle = "TESTT";
         String updatedContent = "421842jdf";
 
-        note.setTitle(updatedTitle);
-        note.setContent(updatedContent);
-        service.update(note);
-
-        Note updatedNote = service.getById(note.getId());
+        noteToUpdate.setTitle(updatedTitle);
+        noteToUpdate.setContent(updatedContent);
+        service.update(noteToUpdate);
+        NoteDto afterUpdate = service.getById(noteToUpdate.getId());
 
         // Перевірка, що заголовок і зміст оновленої нотатки правильні
-        Assertions.assertEquals(updatedTitle, updatedNote.getTitle());
-        Assertions.assertEquals(updatedContent, updatedNote.getContent());
+        Assertions.assertEquals(updatedTitle, afterUpdate.getTitle());
+        Assertions.assertEquals(updatedContent, afterUpdate.getContent());
         // Перевірка, що ідентифікатори нотаток співпадають
-        Assertions.assertEquals(beforeUpdateNote.getId(), updatedNote.getId());
+        Assertions.assertEquals(idBeforeUpdate, afterUpdate.getId());
     }
 
-    public Note findLastNote(){
-        int size = service.listAll().size();
-        return  service.listAll().get(size-1);
+    NoteDto findLastNote() {
+        return mapper.toNoteDto(repository.findFirstByOrderByIdDesc());
     }
 }

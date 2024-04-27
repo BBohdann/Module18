@@ -1,0 +1,5 @@
+CREATE TABLE note(
+id SERIAL PRIMARY KEY,
+title VARCHAR(150) CHECK((CHAR_LENGTH(title) between 5 and 150)),
+content VARCHAR(1000) NOT NULL
+);

@@ -1,13 +1,11 @@
 package com.project.proj.service.note;
 
-import com.project.proj.data.entity.Note;
-
 import java.util.List;
 
 public interface NoteService {
-     List<Note> listAll();
-     Note add(Note note);
+     List<NoteDto> listAll();
+     NoteDto add(NoteDto note);
      void deleteById(long id);
-     void update(Note note);
-     Note getById(long id);
+     void update(NoteDto note);
+     NoteDto getById(long id);
 }

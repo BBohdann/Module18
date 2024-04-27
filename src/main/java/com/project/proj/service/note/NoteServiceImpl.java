@@ -1,43 +1,60 @@
 package com.project.proj.service.note;
 
 import com.project.proj.data.entity.Note;
+import com.project.proj.data.repository.NoteRepository;
+import com.project.proj.exeptions.NoteNotFoundException;
+import com.project.proj.service.mapper.NoteMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.project.proj.data.repository.PseudoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
-    private final PseudoRepository repository;
+    private final NoteRepository repository;
+    private final NoteMapper mapper;
 
     @Override
-    public List<Note> listAll() {
-        return repository.getNotes();
+    @Transactional
+    public List<NoteDto> listAll() {
+        return mapper.toNoteDtos(repository.findAll());
     }
 
     @Override
-    public Note add(Note note) {
-        return repository.createNote(note);
+    public NoteDto add(NoteDto note) {
+        Note entity = mapper.toNoteEntity(note);
+        return mapper.toNoteDto(repository.save(entity));
     }
 
     @Override
+    @Transactional
     public void deleteById(long id) {
-        repository.deleteNote(id);
+        if (repository.findById(id).isEmpty()) {
+            throw new NoteNotFoundException();
+        }
+        repository.deleteById(id);
     }
 
     @Override
-    public void update(Note note) {
-        List<Note> notes = listAll();
-        int index = notes.indexOf(repository.findNoteById(note.getId()));
-        notes.set(index, note);
+    @Transactional
+    public void update(NoteDto note) {
+        if (repository.findById(note.getId()).isEmpty()) {
+            throw new NoteNotFoundException();
+        }
+        repository.save(mapper.toNoteEntity(note));
     }
 
     @Override
-    public Note getById(long id) {
-        return repository.findNoteById(id);
+    public NoteDto getById(long id) {
+        Optional<Note> note = repository.findById(id);
+        if (note.isEmpty()) {
+            throw new NoteNotFoundException();
+        }
+        return mapper.toNoteDto(note.get());
     }
 }
