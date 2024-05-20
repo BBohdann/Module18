@@ -1,6 +1,5 @@
 package com.project.proj.controller;
 
-import com.project.proj.service.mapper.NoteMapper;
 import com.project.proj.service.note.NoteDto;
 import com.project.proj.service.note.NoteService;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
