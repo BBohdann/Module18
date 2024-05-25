@@ -1,4 +1,4 @@
-package com.project.proj.exeptions;
+package com.project.proj.service.exeptions;
 
 import lombok.NoArgsConstructor;
 

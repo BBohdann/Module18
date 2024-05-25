@@ -1,7 +1,7 @@
 package com.project.proj.note;
 
 import com.project.proj.data.repository.NoteRepository;
-import com.project.proj.exeptions.NoteNotFoundException;
+import com.project.proj.service.exeptions.NoteNotFoundException;
 import com.project.proj.service.mapper.NoteMapper;
 import com.project.proj.service.note.NoteDto;
 import com.project.proj.service.note.NoteService;

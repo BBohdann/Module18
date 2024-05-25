@@ -2,7 +2,7 @@ package com.project.proj.service.note;
 
 import com.project.proj.data.entity.Note;
 import com.project.proj.data.repository.NoteRepository;
-import com.project.proj.exeptions.NoteNotFoundException;
+import com.project.proj.service.exeptions.NoteNotFoundException;
 import com.project.proj.service.mapper.NoteMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
